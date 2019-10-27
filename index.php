@@ -27,8 +27,8 @@ $user_name='Антон'; // укажите здесь ваше имя
         <a class="main-header__add-lot button" href="pages/add-lot.html">Добавить лот</a>
 
         <nav class="user-menu">
-        <!-- здесь должен быть PHP код для показа меню и данных пользователя -->
-           <?php if($is_auth==1): ?>
+        <!-- здесь должен быть PHP код для показа меню и данных пользователя (задание после первой лекции) -->
+           <?php if($is_auth===1): ?>
               <div class="user-menu__logged">
                 <p><?=$user_name; ?></p>
                 <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
@@ -53,10 +53,13 @@ $user_name='Антон'; // укажите здесь ваше имя
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
-            <!--заполните этот список из массива категорий-->
+          <!--заполните этот список из массива категорий (задание после второй лекции)-->
+          <?php
+          $categories = ["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"]; ?>
             <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="pages/all-lots.html">Имя категории</a>
+                <a class="promo__link" href="pages/all-lots.html"><?echo $categories[0];?></a>
             </li>
+            
         </ul>
     </section>
     <section class="lots">
