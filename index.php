@@ -1,4 +1,4 @@
-<?php
+<?
 $is_auth = rand(0, 1);
 
 $user_name='Антон'; // укажите здесь ваше имя
@@ -28,13 +28,13 @@ $user_name='Антон'; // укажите здесь ваше имя
 
         <nav class="user-menu">
         <!-- здесь должен быть PHP код для показа меню и данных пользователя (задание после первой лекции) -->
-           <?php if($is_auth===1): ?>
+           <? if($is_auth===1): ?>
               <div class="user-menu__logged">
                 <p><?=$user_name; ?></p>
                 <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
                 <a class="user-menu__logout" href="#">Выход</a>
               </div>
-           <?php else: ?>
+           <? else: ?>
               <ul class="user-menu__list">
                 <li class="user-menu__item">
                    <a href="#">Регистрация</a>
@@ -42,7 +42,7 @@ $user_name='Антон'; // укажите здесь ваше имя
                 <li class="user-menu__item">
                    <a href="#">Вход</a>
                 </li>
-           <?php endif; ?>
+           <? endif; ?>
               </ul>
         </nav>
     </div>
@@ -54,14 +54,13 @@ $user_name='Антон'; // укажите здесь ваше имя
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
           <!--заполните этот список из массива категорий (задание после второй лекции)-->
-          <?php
-          $categories = ["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"];//Одномерный массив 
+          <? $categories = ["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"];//Одномерный массив 
           ?> 
-          <?php foreach ($categories as $value): ?>
+          <? foreach ($categories as $value): ?>
             <li class="promo__item promo__item--boards">
                 <a class="promo__link" href="pages/all-lots.html"><?=$value;?></a>
             </li> 
-            <?php endforeach; ?>
+            <? endforeach; ?>
         </ul>
     </section>
     <section class="lots">
@@ -70,8 +69,7 @@ $user_name='Антон'; // укажите здесь ваше имя
         </div>
         <ul class="lots__list">
             <!--заполните этот список из массива с товарами-->
-            <?php
-            $goods = [   //Двумерный массив
+            <? $goods = [   //Двумерный массив
                 [
                     'name' => '2014 Rossignol District Snowboard',
                     'category' => 'Доски и лыжи',
@@ -109,7 +107,7 @@ $user_name='Антон'; // укажите здесь ваше имя
                 ]
                 ];
             ?>
-            <?php foreach($goods as $key => $val): ?>
+            <? foreach($goods as $key => $val): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="<?=$val['img']; ?>" width="350" height="260" alt="">
@@ -128,7 +126,7 @@ $user_name='Антон'; // укажите здесь ваше имя
                     </div>
                 </div>
             </li>
-            <?php endforeach; ?>
+            <? endforeach; ?>
         </ul>
     </section>
 </main>
@@ -138,14 +136,13 @@ $user_name='Антон'; // укажите здесь ваше имя
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-          <?php
-          $categories = ["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"];//Одномерный массив 
+          <? $categories = ["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"];//Одномерный массив 
           ?> 
-          <?php foreach ($categories as $value): ?>
+          <? foreach ($categories as $value): ?>
             <li class="nav__item">
                 <a href="pages/all-lots.html"><?=$value;?></a>
             </li>
-            <?php endforeach; ?>
+            <? endforeach; ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
