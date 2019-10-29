@@ -1,16 +1,19 @@
 <?
 $is_auth = rand(0, 1);
 
-function decorate_number($input) {
-    $output = "";
-    if (ceil($input)) > 1000 { 
-        $output = $input;}
+ function decorate_number($input) {
+    if (ceil($input) < 1000) {
+        $output = ceil($input);
+
+    }
     else {
-        
+        number_format(ceil($input));
+        $output = ceil($input);
     }
+    '₽'
     }
-    
-}
+    return $output;
+} 
 
 $user_name='Антон'; // укажите здесь ваше имя
 ?>
