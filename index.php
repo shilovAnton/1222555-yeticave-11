@@ -1,12 +1,17 @@
 <?
 $is_auth = rand(0, 1);
 
+// Функция форматирования числа суммы
+
 function decorate_number($input) {
-    if (ceil($input) < 1000) {
-        $number = ceil($input);
+
+    $cell_number = ceil($input);
+
+    if ($cell_number < 1000) {
+        $output = $cell_number;
     }
     else {
-        $number = number_format (ceil($input), $decimals = null, $dec_point = null, $thousands_sep = " ");
+        $number = number_format ($cell_number, $decimals = null, $dec_point = null, $thousands_sep = " ");
     }
     $output = "$number ₽";
     return $output;
