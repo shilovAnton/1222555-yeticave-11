@@ -10,9 +10,9 @@ function decorate_number($input) {
         $output = $cell_number;
     }
     else {
-        $number = number_format($cell_number, 0, ".", " ");
+        $output = number_format($cell_number, 0, ".", " ");
     }
-    return "$number ₽";
+    return "$output ₽";
 }
 
 $user_name='Антон'; // укажите здесь ваше имя
