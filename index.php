@@ -1,19 +1,16 @@
 <?
 $is_auth = rand(0, 1);
 
- function decorate_number($input) {
+function decorate_number($input) {
     if (ceil($input) < 1000) {
-        $output = ceil($input);
-
+        $number = ceil($input);
     }
     else {
-        number_format(ceil($input));
-        $output = ceil($input);
+        $number = number_format (ceil($input), $decimals = null, $dec_point = null, $thousands_sep = " ");
     }
-    '₽'
-    }
+    $output = "$number ₽";
     return $output;
-} 
+}
 
 $user_name='Антон'; // укажите здесь ваше имя
 ?>
@@ -132,7 +129,7 @@ $user_name='Антон'; // укажите здесь ваше имя
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount"><?=$val['price']; ?></span>
-                            <span class="lot__cost"><?=$val['price']; ?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?= decorate_number($val['price']); ?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
