@@ -1,6 +1,20 @@
 <?php
 $is_auth = rand(0, 1);
 
+// Функция форматирования числа суммы
+function decorate_number($input) {
+
+    $cell_number = ceil($input);
+
+    if ($cell_number < 1000) {
+        $output = $cell_number;
+    }
+    else {
+        $output = number_format($cell_number, 0, ".", " ");
+    }
+    return "$output ₽";
+}
+
 $user_name='Антон'; // укажите здесь ваше имя
 ?>
 <!DOCTYPE html>
@@ -56,12 +70,14 @@ $user_name='Антон'; // укажите здесь ваше имя
           <!--заполните этот список из массива категорий (задание после второй лекции)-->
           <?php
           $categories = ["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"];//Одномерный массив 
-          ?> 
-          <?php foreach ($categories as $value): ?>
+          ?>
+
+          <?php
+          foreach($categories as $value): ?>
             <li class="promo__item promo__item--boards">
                 <a class="promo__link" href="pages/all-lots.html"><?=$value;?></a>
             </li> 
-            <?php endforeach; ?>
+          <?php endforeach; ?>
         </ul>
     </section>
     <section class="lots">
@@ -120,7 +136,7 @@ $user_name='Антон'; // укажите здесь ваше имя
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount"><?=$val['price']; ?></span>
-                            <span class="lot__cost"><?=$val['price']; ?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?= decorate_number($val['price']); ?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
@@ -128,7 +144,7 @@ $user_name='Антон'; // укажите здесь ваше имя
                     </div>
                 </div>
             </li>
-            <?php endforeach; ?>
+            <? endforeach; ?>
         </ul>
     </section>
 </main>
@@ -137,15 +153,12 @@ $user_name='Антон'; // укажите здесь ваше имя
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <!--заполните этот список из массива категорий-->
-          <?php
-          $categories = ["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"];//Одномерный массив 
-          ?> 
-          <?php foreach ($categories as $value): ?>
+        <!--заполните этот список из массива категори-->
+          <?php foreach($categories as $value): ?>
             <li class="nav__item">
                 <a href="pages/all-lots.html"><?=$value;?></a>
             </li>
-            <?php endforeach; ?>
+          <?php endforeach; ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
