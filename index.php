@@ -1,4 +1,6 @@
 <?php
+    require_once('helpers.php');
+
     $user_name = 'Антон'; // укажите здесь ваше имя
 
     $categories = ["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"];//Одномерный массив 
@@ -43,12 +45,13 @@
     ?>
 
 <?php // Подключение шаблонов
-    require_once('helpers.php');
-    $page_content = include_template('templates\main.php', ['goods' => $goods]);
-    $layout_content = include_template('templates\layout.php', ['content' => $page_content,
+    $page_content = include_template('main.php', ['goods' => $goods,
+         'categories' =>  $categories
+    ]);
+    $layout_content = include_template('layout.php', ['content' => $page_content,
         'categories' =>  $categories,
         'title' => 'Главная страница',
-        'user_name' => $user_name,
+        'user_name' => $user_name
     ]);
 
     print($layout_content);
