@@ -142,5 +142,17 @@ function include_template($name, array $data = []) {
 
     return $result;
 }
+// Функция форматирования числа суммы
+function format_as_price_in_rub($input) {
 
+    $cell_number = ceil($input);
+
+    if ($cell_number < 1000) {
+        $output = $cell_number;
+    }
+    else {
+        $output = number_format($cell_number, 0, ".", " ");
+    }
+    return "$output ₽";
+}
 
