@@ -43,6 +43,7 @@
     ?>
 
 <?php // Подключение шаблонов
+    require_once('helpers.php');
     $page_content = include_template('templates\main.php', ['goods' => $goods]);
     $layout_content = include_template('templates\layout.php', ['content' => $page_content,
         'categories' =>  $categories,
