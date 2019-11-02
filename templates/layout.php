@@ -1,6 +1,5 @@
 <?php
 $is_auth = rand(0, 1);
-
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -47,10 +46,8 @@ $is_auth = rand(0, 1);
     </div>
 </header>
 
-</div>
-
 <main class="container"><?= $content; ?></main>
-
+</div>
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
