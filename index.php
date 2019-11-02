@@ -2,6 +2,8 @@
     require_once('helpers.php');
 
     $user_name = 'Антон'; // укажите здесь ваше имя
+    
+    $is_auth = rand(0, 1);
 
     $categories = ["Доски и лыжи","Крепления","Ботинки","Одежда","Инструменты","Разное"];//Одномерный массив 
     
@@ -51,7 +53,8 @@
     $layout_content = include_template('layout.php', ['content' => $page_content,
         'categories' =>  $categories,
         'title' => 'Главная страница',
-        'user_name' => $user_name
+        'user_name' => $user_name,
+        'is_auth' => $is_auth
     ]);
 
     print($layout_content);
