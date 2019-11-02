@@ -1,20 +1,6 @@
 <?php
 $is_auth = rand(0, 1);
 
-
-// Функция форматирования числа суммы
-function format_as_price_in_rub($input) {
-
-    $cell_number = ceil($input);
-
-    if ($cell_number < 1000) {
-        $output = $cell_number;
-    }
-    else {
-        $output = number_format($cell_number, 0, ".", " ");
-    }
-    return "$output ₽";
-}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
