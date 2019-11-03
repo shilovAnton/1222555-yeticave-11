@@ -27,11 +27,11 @@
                         <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?=htmlspecialchars($val['name']); ?></a></h3>
                         <div class="lot__state">
                             <div class="lot__rate">
-                                <span class="lot__amount"><?=$val['price']; ?></span>
+                                <span class="lot__amount"></span>
                                 <span class="lot__cost"><?= format_as_price_in_rub($val['price']); ?></span>
                             </div>
                             <div class="lot__timer timer">
-                                12:23
+                                <?=time_to_finish($val['дата истечения']); ?>
                             </div>
                         </div>
                     </div>
