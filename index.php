@@ -64,7 +64,7 @@
         'title' => 'YetiCave - Главная страница',
         'user_name' => $user_name,
         'is_auth' => $is_auth,//Рандомная функция
-
+        
     ]);
     print($layout_content);
 
@@ -78,12 +78,14 @@
     //$dt_diff = date_diff($d_end,$dt_now);
     //$time_count = date_interval_format($diff, "%d")
 
+    
+
     function time_to_finish($data_finish) {
-        date_default_timezone_set('(Asia/Novosibirsk');
+        date_default_timezone_set('Asia/Novosibirsk');
 
         $timestamp_finish = strtotime($data_finish); //Метка времени из текстового представления
         $timestamp_start = time();
-        $interval = $timestamp_finish - $timestamp_start - 4 * 3600;
+        $interval = $timestamp_finish - $timestamp_start;
         $hours = floor($interval/3600);
         $minuts = floor(($interval % 3600)/60);
         $hours_for_output = str_pad($hours, 2, "0", STR_PAD_LEFT);
