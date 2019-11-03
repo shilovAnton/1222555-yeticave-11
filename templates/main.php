@@ -29,10 +29,11 @@
                             <div class="lot__rate">
                                 <span class="lot__amount"></span>
                                 <span class="lot__cost"><?= format_as_price_in_rub($val['price']); ?></span>
-                            </div>
-                            <div class="lot__timer timer">
+                            </div>                            
+                            <div class="lot__timer timer">                                    
                                 <?=time_to_finish($val['дата истечения']); ?>
                             </div>
+                                <!-- <div class="timer--finishing">-->                                 
                         </div>
                     </div>
                 </li>
