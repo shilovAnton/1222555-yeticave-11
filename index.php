@@ -69,29 +69,17 @@
     print($layout_content);
 
     // Функция подсчета отавшегося времени
-    
-    //setlocale(LC_ALL,'en_DK');
-    
-    //$int_end = "2019-11-26";
-    //$d_end = date_create($int_end);
-    // $dt_now = date_create("now");
-    //$dt_diff = date_diff($d_end,$dt_now);
-    //$time_count = date_interval_format($diff, "%d")
-
-    
-
-    function time_to_finish($data_finish) {
+    function timer($deita_finish) {
         date_default_timezone_set('Asia/Novosibirsk');
 
-        $timestamp_finish = strtotime($data_finish); //Метка времени из текстового представления
+        $timestamp_finish = strtotime($deita_finish); //Метка времени из текстового представления
         $timestamp_start = time();
-        $interval = $timestamp_finish - $timestamp_start;
+        $interval = $timestamp_finish - $timestamp_start - 3600 * 11;
         $hours = floor($interval/3600);
         $minuts = floor(($interval % 3600)/60);
         $hours_for_output = str_pad($hours, 2, "0", STR_PAD_LEFT);
         $minuts_for_output = str_pad($minuts, 2, "0", STR_PAD_LEFT);
 
-    return $output = "$hours_for_output:$minuts_for_output";
+    return $output = [$hours_for_output, $minuts_for_output,];
     }
-
 ?>
