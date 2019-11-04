@@ -13,42 +13,42 @@
             'category' => 'Доски и лыжи',
             'price' => 10999,
             'img' => 'img/lot-1.jpg',
-            'дата истечения' => '2019-11-05'
+            'end_date' => '2019-11-05'
         ],
         [
             'name' => 'DC Ply Mens 2016/2017 Snowboard',
             'category' => 'Доски и лыжи',
             'price' => 159999,
             'img' => 'img/lot-2.jpg',
-            'дата истечения' => '2020-01-01'
+            'end_date' => '2020-01-01'
         ], 
         [
             'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
             'category' => 'Крепления',
             'price' => 8000,
             'img' => 'img/lot-3.jpg',
-            'дата истечения' => '2019-12-31'
+            'end_date' => '2019-12-31'
         ],
         [
             'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
             'category' => 'Ботинки',
             'price' => 10999,
             'img' => 'img/lot-4.jpg',
-            'дата истечения' => '2019-12-24'
+            'end_date' => '2019-12-24'
         ],
         [
             'name' => 'Куртка для сноуборда DC Mutiny Charocal',
             'category' => 'Одежда',
             'price' => 7500,
             'img' => 'img/lot-5.jpg',
-            'дата истечения' => '2019-11-29'
+            'end_date' => '2019-11-29'
         ],
         [
             'name' => 'Маска Oakley Canopy',
             'category' => 'Разное',
             'price' => 5400,
             'img' => 'img/lot-6.jpg',
-            'дата истечения' => '2019-11-26'
+            'end_date' => '2019-11-26'
         ]
         ];
     ?>
