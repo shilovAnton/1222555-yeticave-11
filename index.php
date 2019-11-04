@@ -74,7 +74,7 @@
 
         $timestamp_finish = strtotime($deita_finish); //Метка времени из текстового представления
         $timestamp_start = time();
-        $interval = $timestamp_finish - $timestamp_start - 3600 * 11;
+        $interval = $timestamp_finish - $timestamp_start;
         $hours = floor($interval/3600);
         $minuts = floor(($interval % 3600)/60);
         $hours_for_output = str_pad($hours, 2, "0", STR_PAD_LEFT);
