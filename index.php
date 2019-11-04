@@ -1,6 +1,8 @@
 <?php
     require_once('helpers.php');
 
+    date_default_timezone_set('Asia/Novosibirsk');
+
     $user_name = 'Антон'; // укажите здесь ваше имя
     
     $is_auth = rand(0, 1);
@@ -68,18 +70,4 @@
     ]);
     print($layout_content);
 
-    // Функция подсчета отавшегося времени
-    function timer($deita_finish) {
-        date_default_timezone_set('Asia/Novosibirsk');
-
-        $timestamp_finish = strtotime($deita_finish); //Метка времени из текстового представления
-        $timestamp_start = time();
-        $interval = $timestamp_finish - $timestamp_start;
-        $hours = floor($interval/3600);
-        $minuts = floor(($interval % 3600)/60);
-        $hours_for_output = str_pad($hours, 2, "0", STR_PAD_LEFT);
-        $minuts_for_output = str_pad($minuts, 2, "0", STR_PAD_LEFT);
-
-    return $output = [$hours_for_output, $minuts_for_output,];
-    }
 ?>
