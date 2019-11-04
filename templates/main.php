@@ -30,8 +30,8 @@
                                 <span class="lot__amount"></span>
                                 <span class="lot__cost"><? format_as_price_in_rub($val['price']); ?></span>
                             </div>                            
-                            <div class="<?php if (timer($val['дата истечения'])[0] > 1): ?>lot__timer timer<?php else :?>timer--finishing<?php endif ?>">                                  
-                                <?= (timer($val['дата истечения']))[0]?>:<?=(timer($val['дата истечения']))[1]; ?>
+                            <div class="<?php if (timer($val['end_date'])[0] > 1): ?>lot__timer timer<?php else :?>timer--finishing<?php endif ?>">                                  
+                                <?= (timer($val['end_date']))[0]?>:<?=(timer($val['end_date']))[1]; ?>
                             </div>                               
                         </div>
                     </div>
