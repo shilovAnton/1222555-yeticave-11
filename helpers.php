@@ -161,7 +161,13 @@ function format_as_price_in_rub($input) {
     $timestamp_start = time();
     $interval = $timestamp_finish - $timestamp_start;
     $hours = floor($interval/3600);
+        if ($hours < 0) {
+        $hours = 0;
+    }    
     $minuts = floor(($interval % 3600)/60);
+        if ($minuts < 0) {
+        $minuts = 0;
+    }
     $hours_for_output = str_pad($hours, 2, "0", STR_PAD_LEFT);
     $minuts_for_output = str_pad($minuts, 2, "0", STR_PAD_LEFT);
 
