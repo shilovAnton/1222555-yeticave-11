@@ -22,7 +22,7 @@
             'category' => 'Доски и лыжи',
             'price' => 159999,
             'img' => 'img/lot-2.jpg',
-            'end_date' => '2020-01-01'
+            'end_date' => '2019-11-06'
         ], 
         [
             'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
