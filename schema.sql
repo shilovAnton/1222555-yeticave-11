@@ -20,9 +20,9 @@
     dt_end			TIMESTAMP,
     bid_step		DECIMAL,
 
-    user_id_author	INT NOT NULL,
-    user_id_winner	INT,
-    category_id		INT
+    user_id_author	INT FOREIGN KEY REFERENCES users(id),
+    user_id_winner	INT FOREIGN KEY REFERENCES users(id),
+    category_id		INT FOREIGN KEY REFERENCES categories(id)
     );
 
     CREATE TABLE bids (
@@ -30,8 +30,8 @@
     dt_add			TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     bid_price		DECIMAL,
 
-    user_id			INT NOT NULL,
-    lot_id			INT NOT NULL
+    user_id			INT FOREIGN KEY REFERENCES users(id),
+    lot_id			INT FOREIGN KEY REFERENCES lots(id)
     );
 
     CREATE TABLE users (
