@@ -66,7 +66,7 @@
         'title' => 'YetiCave - Главная страница',
         'user_name' => $user_name,
         'is_auth' => $is_auth,//Рандомная функция
-        
+         
     ]);
     print($layout_content);
 
