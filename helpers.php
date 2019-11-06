@@ -155,18 +155,21 @@ function format_as_price_in_rub($input) {
     }
     return "$output ₽";
 }
- // Функция подсчета отавшегося времени
- function timer($date_finish) {
+
+// Функция подсчета отавшегося времени
+function timer($date_finish)
+{
     $timestamp_finish = strtotime($date_finish); //Метка времени из текстового представления
     $timestamp_start = time();
     $interval = $timestamp_finish - $timestamp_start;
-    $hours = floor($interval/3600);
-    $minuts = floor(($interval % 3600)/60);
-        if ($hours + $minuts < 0) {
+    $hours = floor($interval / 3600);
+    $minuts = floor(($interval % 3600) / 60);
+    if ($hours + $minuts < 0) {
         $hours = 0;
-        $minuts = 0;}
+        $minuts = 0;
+    }
     $hours_for_output = str_pad($hours, 2, "0", STR_PAD_LEFT);
     $minuts_for_output = str_pad($minuts, 2, "0", STR_PAD_LEFT);
 
-return $output = [$hours_for_output, $minuts_for_output,];
+    return $output = [$hours_for_output, $minuts_for_output,];
 }
