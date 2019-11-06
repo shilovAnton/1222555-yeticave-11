@@ -39,7 +39,7 @@
     dt_reg			TIMESTAMP,
     email			VARCHAR(128) NOT NULL UNIQUE,
     user_name		VARCHAR(128) NOT NULL UNIQUE,
-    password		CHAR(64) NOT NULL UNIQUE,
+    password		CHAR(64) NOT NULL,
     contact_info	TEXT
     );
 
