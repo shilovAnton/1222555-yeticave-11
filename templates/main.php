@@ -7,7 +7,7 @@
             foreach($categories as $value): ?>
                 <li class="promo__item promo__item--boards">
                     <a class="promo__link" href="pages/all-lots.html"><?=htmlspecialchars($value); ?></a>
-                </li> 
+                </li>
             <?php endforeach; ?>
         </ul>
     </section>
@@ -28,12 +28,12 @@
                         <div class="lot__state">
                             <div class="lot__rate">
                                 <span class="lot__amount"></span>
-                                <span class="lot__cost"><? format_as_price_in_rub($good['price']); ?></span>
-                            </div>    
-                            <?php $timer = timer($good['end_date']); ?>                      
+                                <span class="lot__cost"><?= format_as_price_in_rub($good['price']); ?></span>
+                            </div>
+                            <?php $timer = timer($good['end_date']); ?>
                             <div class="lot__timer timer <?php if ($timer[0] < 1): ?> timer--finishing<?php endif;?>">
                                 <?= $timer[0]?>:<?=$timer[1]; ?>
-                            </div>                               
+                            </div>
                         </div>
                     </div>
                 </li>
