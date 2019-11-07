@@ -148,7 +148,7 @@ function include_template($name, array $data = []) {
  * @param  int $input Сумма (число).
  * @return string Отформатированное число.
  */
-//
+
 function format_as_price_in_rub($input) {
 
     $cell_number = ceil($input);
