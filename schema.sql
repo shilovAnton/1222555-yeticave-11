@@ -3,6 +3,16 @@ CREATE DATABASE yeticave
     DEFAULT COLLATE utf8_general_ci;
 USE yeticave;
 
+CREATE TABLE users
+(
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    dt_reg       TIMESTAMP,
+    email        VARCHAR(128) NOT NULL UNIQUE,
+    user_name    VARCHAR(128) NOT NULL UNIQUE,
+    password     CHAR(64)     NOT NULL,
+    contact_info TEXT
+);
+
 CREATE TABLE categories
 (
     id            INT AUTO_INCREMENT PRIMARY KEY,
@@ -39,16 +49,6 @@ CREATE TABLE bids
     FOREIGN KEY (user_id) REFERENCES users(id),
     lot_id    INT,
     FOREIGN KEY (lot_id) REFERENCES lots(id)
-);
-
-CREATE TABLE users
-(
-    id           INT AUTO_INCREMENT PRIMARY KEY,
-    dt_reg       TIMESTAMP,
-    email        VARCHAR(128) NOT NULL UNIQUE,
-    user_name    VARCHAR(128) NOT NULL UNIQUE,
-    password     CHAR(64)     NOT NULL,
-    contact_info TEXT
 );
 
 CREATE INDEX dt_add ON lots (dt_add);
