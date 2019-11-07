@@ -142,7 +142,13 @@ function include_template($name, array $data = []) {
 
     return $result;
 }
-// Функция форматирования числа суммы
+
+/**
+ * Функция форматирования числа суммы, ставит пробел между категориями, добавляет знак ₽.
+ * @param  int $input Сумма (число).
+ * @return string Отформатированное число.
+ */
+//
 function format_as_price_in_rub($input) {
 
     $cell_number = ceil($input);
@@ -156,7 +162,11 @@ function format_as_price_in_rub($input) {
     return "$output ₽";
 }
 
-// Функция подсчета отавшегося времени
+/**
+ * Подcчитывает интервал времени в ЧЧ:ММ.
+ * @param string $date_finish Дата окнчания аукциона.
+ * @return array [ЧЧ,ММ]
+ */
 function timer($date_finish)
 {
     $timestamp_finish = strtotime($date_finish); //Метка времени из текстового представления
