@@ -142,7 +142,13 @@ function include_template($name, array $data = []) {
 
     return $result;
 }
-// Функция форматирования числа суммы
+
+/**
+ * Функция форматирования числа суммы, ставит пробел между категориями, добавляет знак ₽.
+ * @param  int $input Сумма (число).
+ * @return string Отформатированное число.
+ */
+
 function format_as_price_in_rub($input) {
 
     $cell_number = ceil($input);
@@ -155,15 +161,25 @@ function format_as_price_in_rub($input) {
     }
     return "$output ₽";
 }
- // Функция подсчета отавшегося времени
- function timer($deita_finish) {
-    $timestamp_finish = strtotime($deita_finish); //Метка времени из текстового представления
+
+/**
+ * Подcчитывает интервал времени в ЧЧ:ММ.
+ * @param string $date_finish Дата окнчания аукциона.
+ * @return array [ЧЧ,ММ]
+ */
+function timer($date_finish)
+{
+    $timestamp_finish = strtotime($date_finish); //Метка времени из текстового представления
     $timestamp_start = time();
     $interval = $timestamp_finish - $timestamp_start;
-    $hours = floor($interval/3600);
-    $minuts = floor(($interval % 3600)/60);
+    $hours = floor($interval / 3600);
+    $minuts = floor(($interval % 3600) / 60);
+    if ($hours + $minuts < 0) {
+        $hours = 0;
+        $minuts = 0;
+    }
     $hours_for_output = str_pad($hours, 2, "0", STR_PAD_LEFT);
     $minuts_for_output = str_pad($minuts, 2, "0", STR_PAD_LEFT);
 
-return $output = [$hours_for_output, $minuts_for_output,];
+    return $output = [$hours_for_output, $minuts_for_output,];
 }
