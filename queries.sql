@@ -50,12 +50,13 @@ FROM categories;
 /* получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение,
 текущую цену, название категории */
 
-SELECT lot_name, initial_price, img, bid_price, category_name
+SELECT lots.id, lot_name, initial_price, img, MAX(bid_price) as current_price, category_name
 FROM lots
-         LEFT JOIN bids ON lots.id = bids.lot_id  /* LEFT JOIN потому, чтобы выводилась стартовая цена, если нет предлжений */
-         JOIN categories c on lots.category_id = c.id
-WHERE dt_end > CURRENT_TIME
-LIMIT 6;
+         LEFT JOIN bids ON lots.id = bids.lot_id
+         LEFT JOIN categories c on lots.category_id = c.id
+WHERE dt_end > NOW()
+GROUP BY lots.id
+ORDER BY lots.dt_add DESC LIMIT 3;
 
 
 /* показать лот по его id. Получите также название категории, к которой принадлежит лот */
