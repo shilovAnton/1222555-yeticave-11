@@ -18,17 +18,17 @@ VALUES ('2019-11-09', 'shilov.a.a.1986@gmail.com', 'Антон', 123456789, 'т.
 INSERT INTO lots
 (dt_add, lot_name, description, img, initial_price, dt_end, bid_step, user_id_author, category_id)
 VALUES ('2019-11-09', '2014 Rossignol District Snowboard', 'В идеальном состоянии', 'img/lot-1.jpg', 10999,
-        '2019-11-11', 100, 1, 15),
+        '2019-11-11', 100, 1, 1),
        ('2019-11-10', 'DC Ply Mens 2016/2017 Snowboard', 'бла бла бла', 'img/lot-2.jpg', 159999, '2019-11-14', 500,
-        8, 15),
+        2, 1),
        ('2019-11-11', 'Крепления Union Contact Pro 2015 года размер L/XL', 'Все работает отлично', 'img/lot-3.jpg',
-        8000, '2019-11-12', 1000, 1, 16),
+        8000, '2019-11-12', 1000, 1, 2),
        ('2019-11-08', 'Ботинки для сноуборда DC Mutiny Charocal', '47 размер', 'img/lot-4.jpg', 10999, '2019-11-13',
-        200, 2, 17),
+        200, 2, 3),
        ('2019-11-07', 'Куртка для сноуборда DC Mutiny Charocal', 'Куртка - супер!', 'img/lot-5.jpg', 7500, '2019-11-15',
-        300, 1, 18),
+        300, 1, 4),
        ('2019-11-06', 'Маска Oakley Canopy', 'Хорошая маска, в идеале', 'img/lot-6.jpg', 5400, '2019-11-24', 400, 2,
-        20);
+        6);
 
 /* Добавляем ставки */
 INSERT INTO bids
@@ -52,29 +52,30 @@ FROM categories;
 
 SELECT lot_name, initial_price, img, bid_price, category_name
 FROM lots
-         LEFT JOIN bids ON lots.id = bids.lot_id
-         LEFT JOIN categories c on lots.category_id = c.id
-WHERE dt_end > CURDATE()
-ORDER BY lots.dt_add DESC LIMIT 3;
+         LEFT JOIN bids ON lots.id = bids.lot_id  /* LEFT JOIN потому, чтобы выводилась стартовая цена, если нет предлжений */
+         JOIN categories c on lots.category_id = c.id
+WHERE dt_end > CURRENT_TIME
+LIMIT 6;
+
 
 /* показать лот по его id. Получите также название категории, к которой принадлежит лот */
 
 SELECT lot_name, category_name
 FROM lots
         JOIN categories ON lots.category_id = categories.id
-WHERE lots.id=13;
+WHERE lots.id=3;
 
 /* обновить название лота по его идентификатору */
 
 UPDATE lots
 SET lot_name='Поменял'
-WHERE id = 15;
+WHERE id = 2;
 
 /* получить список ставок для лота по его идентификатору с сортировкой по дате */
 
 SELECT bid_price
 FROM bids
-WHERE lot_id=12
+WHERE lot_id=4
 ORDER BY dt_add;
 
 
