@@ -56,7 +56,7 @@ FROM lots
          LEFT JOIN categories c on lots.category_id = c.id
 WHERE dt_end > NOW()
 GROUP BY lots.id
-ORDER BY lots.dt_add DESC LIMIT 3;
+ORDER BY lots.dt_add DESC LIMIT 6;
 
 
 /* показать лот по его id. Получите также название категории, к которой принадлежит лот */
