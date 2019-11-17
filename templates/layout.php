@@ -43,7 +43,10 @@
     </div>
 </header>
 
-<main class="container"><?= $content; ?></main>
+<main class="container">
+    <?=$content; ?>
+</main>
+
 </div>
 
 <footer class="main-footer">
@@ -52,7 +55,7 @@
         <!--заполните этот список из массива категори-->
           <?php foreach($categories as $value): ?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=$value;?></a>
+                <a href="pages/all-lots.html"><?=$value['category_name'];?></a>
             </li>
           <?php endforeach; ?>
         </ul>
