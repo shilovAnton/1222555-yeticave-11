@@ -1,75 +1,50 @@
 <?php
-require_once('helpers.php');
-
-date_default_timezone_set('Asia/Novosibirsk');
-
+require_once('helpers.php'); //Подключаем файл
+date_default_timezone_set('Asia/Novosibirsk');//Часовой пояс
 $user_name = 'Антон'; // укажите здесь ваше имя
+$is_auth = rand(0, 1);//Рандомная
 
-$is_auth = rand(0, 1);
 
-$categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];//Одномерный массив
+// Подключение БД
+$con = mysqli_connect("localhost", "root", "", "yeticave");//Подключение БД, ресурс соединения
+if ($con == false) {
+    print("Ошибка подключения: " . mysqli_connect_error());
+} else {
+    mysqli_set_charset($con, "utf8");  // Установить кодировку
 
-$goods = [   //Двумерный массив
-    [
-        'name' => '2014 Rossignol District Snowboard',
-        'category' => 'Доски и лыжи',
-        'price' => 10999,
-        'img' => 'img/lot-1.jpg',
-        'end_date' => '2019-11-05'
-    ],
-    [
-        'name' => 'DC Ply Mens 2016/2017 Snowboard',
-        'category' => 'Доски и лыжи',
-        'price' => 159999,
-        'img' => 'img/lot-2.jpg',
-        'end_date' => '2019-11-06'
-    ],
-    [
-        'name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
-        'category' => 'Крепления',
-        'price' => 8000,
-        'img' => 'img/lot-3.jpg',
-        'end_date' => '2019-12-31'
-    ],
-    [
-        'name' => 'Ботинки для сноуборда DC Mutiny Charocal',
-        'category' => 'Ботинки',
-        'price' => 10999,
-        'img' => 'img/lot-4.jpg',
-        'end_date' => '2019-12-24'
-    ],
-    [
-        'name' => 'Куртка для сноуборда DC Mutiny Charocal',
-        'category' => 'Одежда',
-        'price' => 7500,
-        'img' => 'img/lot-5.jpg',
-        'end_date' => '2019-11-29'
-    ],
-    [
-        'name' => 'Маска Oakley Canopy',
-        'category' => 'Разное',
-        'price' => 5400,
-        'img' => 'img/lot-6.jpg',
-        'end_date' => '2019-11-26'
-    ]
-];
+    $sql = "SELECT * FROM categories";
+    $result = mysqli_query($con, $sql);  // функция для выполнения любых SQL запросов
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    $query_lots = "SELECT lots.id, lot_name, initial_price, img, MAX(bid_price) as current_price, category_name,dt_end
+FROM lots
+         LEFT JOIN bids ON lots.id = bids.lot_id
+         LEFT JOIN categories c on lots.category_id = c.id
+WHERE dt_end > NOW()
+GROUP BY lots.id
+ORDER BY lots.dt_add DESC LIMIT 6";
+    $result_lots = mysqli_query($con, $query_lots);
+    $goods = mysqli_fetch_all($result_lots, MYSQLI_ASSOC);
+    if (!$result or !$result_lots) {
+        $error = mysqli_error($con);
+        print("Ошибка MySQL: " . $error);
+    }
+}
 ?>
 
 <?php // Подключение шаблонов
 $page_content = include_template('main.php', [
     'goods' => $goods,
     'categories' => $categories,
-
-    // 'dt' => $time_count
 ]);
+
 $layout_content = include_template('layout.php', [
     'content' => $page_content,
     'categories' => $categories,
     'title' => 'YetiCave - Главная страница',
     'user_name' => $user_name,
-    'is_auth' => $is_auth,//Рандомная функция
+    'is_auth' => $is_auth//Рандомная функция
 
 ]);
 print($layout_content);
-
 ?>
