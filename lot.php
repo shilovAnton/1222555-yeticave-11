@@ -27,8 +27,6 @@ if ($result_lot) {
 }
 
 
-
-
 // Подключение шаблонов
 $lot_content = include_template('lot.php', [
     'lot' => $lot,
