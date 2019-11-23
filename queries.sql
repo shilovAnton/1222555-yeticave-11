@@ -61,7 +61,7 @@ ORDER BY lots.dt_add DESC LIMIT 6;
 
 /* показать лот по его id. Получите также название категории, к которой принадлежит лот */
 
-SELECT lot_name, category_name
+SELECT *
 FROM lots
         JOIN categories ON lots.category_id = categories.id
 WHERE lots.id=3;
