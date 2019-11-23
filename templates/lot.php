@@ -16,8 +16,15 @@
                 </div>
                 <div class="lot-item__cost-state">
                     <div class="lot-item__rate">
-                        <span class="lot-item__amount">Текущая цена</span>
-                        <span class="lot-item__cost"><?= format_as_price_in_rub($lot['initial_price']); ?></span>
+                        <span class="lot-item__amount"><?php if ($lot['current_price'] === null): ?>Начальная цена
+                            <?php else: ?>Текущая цена<?php endif; ?></span>
+                        <span class="lot-item__cost"><?php
+                            if ($lot['current_price'] === null) {
+                                print format_as_price_in_rub($lot['initial_price']);
+                            } else {
+                                print format_as_price_in_rub($lot['current_price']);
+                            } ?>
+                        </span>
                     </div>
                     <div class="lot-item__min-cost">
                         Мин. ставка <span><?= format_as_price_in_rub($lot['bid_step']); ?></span>
