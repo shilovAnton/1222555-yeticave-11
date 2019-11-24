@@ -33,8 +33,8 @@
                                 <span class="lot__cost"><?= format_as_price_in_rub($lot['initial_price']); ?></span>
                             </div>
                             <?php $timer = timer($lot['dt_end']); ?>
-                            <div class="lot__timer timer <?php if ($timer[0] < 1): ?> timer--finishing<?php endif; ?>">
-                                <?= $timer[0] ?>:<?= $timer[1]; ?>
+                            <div class="lot__timer timer <?php if ($timer[0] < 1): ?>timer--finishing<?php endif; ?>">
+                                <?= $timer[0] ?> : <?= $timer[1]; ?>
                             </div>
                         </div>
                     </div>
