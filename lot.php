@@ -25,7 +25,10 @@ if ($result_lot) {
 } else {
     show_error($mysqli_connect);
 }
-
+if (!isset($lot)){
+    header("HTTP/1.0 404 Not Found");
+    die;
+}
 
 // Подключение шаблонов
 $lot_content = include_template('lot.php', [
