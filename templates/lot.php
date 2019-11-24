@@ -16,10 +16,16 @@
                 </div>
                 <div class="lot-item__cost-state">
                     <div class="lot-item__rate">
-                        <span class="lot-item__amount"><?php if ($lot['current_price'] === null): ?>Начальная цена
-                            <?php else: ?>Текущая цена<?php endif; ?></span>
+                        <span class="lot-item__amount">
+                            <?php if ($lot['current_price'] === null): ?>
+                                Начальная цена
+                            <?php else: ?>
+                                Текущая цена
+                            <?php endif; ?>
+                        </span>
                         <span class="lot-item__cost"><?php
-                            if ($lot['current_price'] === null) {
+                            if ($lot['current_price'] === null)
+                            {
                                 print format_as_price_in_rub($lot['initial_price']);
                             } else {
                                 print format_as_price_in_rub($lot['current_price']);
