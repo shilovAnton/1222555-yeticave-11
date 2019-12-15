@@ -181,11 +181,63 @@ function timer($date_finish)
     $hours_for_output = str_pad($hours, 2, "0", STR_PAD_LEFT);
     $minuts_for_output = str_pad($minuts, 2, "0", STR_PAD_LEFT);
 
-    return $output = [$hours_for_output, $minuts_for_output,];
+    return $output = [$hours_for_output, $minuts_for_output];
+}
+
+/**
+ * Проверка данных из формы.
+ * @param $data
+ * @return string $data
+ */
+function check($data)
+{
+    if (isset($data)) {
+        $data = trim($data); // Удаляет пробелы
+        $data = stripslashes($data); // Удаляет экранирование символов, двойные слеши
+        $data = htmlspecialchars($data); // Преобразует специальные символы в HTML-сущности
+        }
+    return $data;
 }
 
 
+/**
+ * Заполнение поля после отпавки формы.
+ * @param $name
+ * @return mixed|string
+ */
+function getPostVal($name) {
+    htmlspecialchars($name);
+    return $_POST[$name] ?? "";
+}
 
+/**
+ * Проверка длины поля
+ * @param $name string Имя поя.
+ * @param $min int
+ * @param $max int
+ * @return string
+ */
+function isCorrectLength($name, $min, $max) {
+    $len = strlen($_POST[$name]);
+    if ($len < $min or $len > $max) {
+        return "Значение должно быть от $min до $max символов";
+    }
+}
 
+/**
+ * добавление новой записи
+ * @param $link
+ * @param $sql
+ * @param array $data
+ * @return bool|int|string
+ */
+function db_insert_data($link, $sql, $data = []) {
+    $stmt = db_get_prepare_stmt($link, $sql, $data);
+    $result = mysqli_stmt_execute($stmt);
+    if ($result) {
+        $result = mysqli_insert_id($link);
+    }
+    return $result;
+}
 
 
