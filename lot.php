@@ -6,7 +6,7 @@ require_once('categories.php');
 require_once('mysqli_connect.php');
 
 // Обращаемся к $_GET и проверяем на существование id
-$lot_id = filter_input (INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$lot_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (empty($lot_id)) {  //Проверяет переменную, возвращает true если переменной нет, или равна NULL
     header("HTTP/1.0 404 Not Found");
     die;
