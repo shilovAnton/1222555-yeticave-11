@@ -67,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $file_path = __DIR__ . '/uploads/'; // это полный путь к дериктории где будет храниться файл.
         //Перемещает загруженный файл в новое место
         move_uploaded_file($_FILES['img']['tmp_name'], $file_path . $_FILES['img']['name']);
-        $img_path =
 
         //SQL запрос с плейсхолдерами вместо значений
         $sql = "INSERT INTO lots (dt_add, user_id_author, lot_name, category_id, description, img, initial_price, bid_step, dt_end) 
