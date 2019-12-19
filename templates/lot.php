@@ -9,6 +9,7 @@
             <p class="lot-item__description"><?= $lot['description']; ?></p>
         </div>
         <div class="lot-item__right">
+            <?php if ($user): ?>
             <div class="lot-item__state">
                 <?php $timer = timer($lot['dt_end']); ?>
                 <div class="lot-item__timer timer <?php if ($timer[0] < 1): ?> timer--finishing<?php endif; ?>">
@@ -24,8 +25,7 @@
                             <?php endif; ?>
                         </span>
                         <span class="lot-item__cost"><?php
-                            if ($lot['current_price'] === null)
-                            {
+                            if ($lot['current_price'] === null) {
                                 print format_as_price_in_rub($lot['initial_price']);
                             } else {
                                 print format_as_price_in_rub($lot['current_price']);
@@ -44,6 +44,7 @@
                     </p>
                     <button type="submit" class="button">Сделать ставку</button>
                 </form>
+                <?php endif; ?>
             </div>
             <div class="history">
                 <h3>История ставок (<span>10</span>)</h3>

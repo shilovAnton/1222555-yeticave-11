@@ -33,14 +33,14 @@ if (!isset($lot)){
 // Подключение шаблонов
 $lot_content = include_template('lot.php', [
     'lot' => $lot,
+    'user' => $user
 ]);
 
 $layout_content = include_template('layout.php',[
     'content' => $lot_content,
     'categories' => $categories,
     'title' => $lot['lot_name'],
-    'user_name' => $user_name,
-    'is_auth' => $is_auth   //Рандомная функция
+    'user' => $user
 ]);
 print($layout_content);
 

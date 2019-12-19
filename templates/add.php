@@ -1,5 +1,3 @@
-<pre><?php var_dump($errors); ?></pre>
-<pre><?php var_dump($_POST); ?></pre>
 <form class="form form--add-lot container<?php if (count($errors) > 0): ?> form--invalid<?php endif; ?>"
       action="add.php" method="post" enctype="multipart/form-data">
     <h2>Добавление лота</h2>

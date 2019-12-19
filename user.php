@@ -1,3 +1,6 @@
 <?php
-$user_name = 'Антон';
-$is_auth = rand(0, 1);//Рандомная
+$user = 0;
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+}
+

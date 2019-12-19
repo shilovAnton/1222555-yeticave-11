@@ -32,9 +32,7 @@ $layout_content = include_template('layout.php',[
     'content' => $page_content,
     'categories' => $categories,
     'title' => 'YetiCave - Главная страница',
-    'user_name' => $user_name,
-    'is_auth' => $is_auth//Рандомная функция
-
+    'user' => $user
 ]);
 print($layout_content);
 

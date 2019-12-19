@@ -5,6 +5,10 @@ require_once('categories.php');
 require_once('user.php');
 date_default_timezone_set('Asia/Novosibirsk');
 
+if (!$user) {
+    http_response_code(403);
+    exit();
+}
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -74,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         //Создает подготовленное выражение на основе готового SQL запроса и переданных данных
         $insert_lot = db_insert_data($mysqli_connect, $sql, [
-            1,
+            $user['id'],
             $_POST['lot_name'],
             $_POST['category_id'],
             $_POST['description'],
@@ -101,8 +105,7 @@ $layout_content = include_template('layout.php',[
     'content' => $add_content,
     'categories' => $categories,
     'title' => 'Добавление лота',
-    'user_name' => $user_name,
-    'is_auth' => $is_auth      //Рандомная функция
+    'user' => $user
 ]);
 print($layout_content);
 
