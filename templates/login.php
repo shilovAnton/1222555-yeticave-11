@@ -1,4 +1,4 @@
-<pre><?php var_dump($errors_login); ?></pre>
+
 <form class="form container<?php if (count($errors_login) > 0): ?> form--invalid<?php endif; ?>"
       action="login.php" method="post">
     <h2>Вход</h2>
