@@ -9,7 +9,7 @@
             <p class="lot-item__description"><?= $lot['description']; ?></p>
         </div>
         <div class="lot-item__right">
-            <?php if (!empty($_SESSION['user'])): ?>
+            <?php if ($user): ?>
             <div class="lot-item__state">
                 <?php $timer = timer($lot['dt_end']); ?>
                 <div class="lot-item__timer timer <?php if ($timer[0] < 1): ?> timer--finishing<?php endif; ?>">
