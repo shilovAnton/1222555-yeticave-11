@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         //Создает подготовленное выражение на основе готового SQL запроса и переданных данных
         $insert_lot = db_insert_data($mysqli_connect, $sql, [
-            1,
+            $result_valid_email[0]['id'],
             $_POST['lot_name'],
             $_POST['category_id'],
             $_POST['description'],
@@ -101,8 +101,8 @@ $layout_content = include_template('layout.php',[
     'content' => $add_content,
     'categories' => $categories,
     'title' => 'Добавление лота',
-    'user_name' => $user_name,
-    'is_auth' => $is_auth      //Рандомная функция
+   // 'user_name' => $user_name,
+  //  'is_auth' => $is_auth      //Рандомная функция
 ]);
 print($layout_content);
 
