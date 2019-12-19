@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Подключение БД
 $mysqli_connect = mysqli_connect("localhost", "root", "", "yeticave");//Подключение БД, ресурс соединения
 if ($mysqli_connect == false) {
