@@ -225,13 +225,15 @@ function isCorrectLength($name, $min, $max) {
 }
 
 /**
- * добавление новой записи
+ * Добавление новой записи
+ *
  * @param $link
  * @param $sql
  * @param array $data
  * @return bool|int|string
  */
-function db_insert_data($link, $sql, $data = []) {
+function db_insert_data($link, $sql, $data = [])
+{
     $stmt = db_get_prepare_stmt($link, $sql, $data);
     $result = mysqli_stmt_execute($stmt);
     if ($result) {
@@ -242,6 +244,7 @@ function db_insert_data($link, $sql, $data = []) {
 
 /**
  * Получение записей
+ *
  * @param $link
  * @param $sql
  * @param array $data
@@ -257,4 +260,3 @@ function db_fetch_data($link, $sql, $data = []) {
     }
     return $result;
 }
-
