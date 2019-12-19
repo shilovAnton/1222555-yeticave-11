@@ -5,6 +5,12 @@ require_once('categories.php');
 require_once('user.php');
 date_default_timezone_set('Asia/Novosibirsk');
 
+//Закрываем доступ для залогиненых
+if ($user) {
+    http_response_code(403);
+    exit();
+}
+
 //Если залогиненый, то 404(
 if (isset($_SESSION['user'])) {
     header("HTTP/1.0 404 Not Found");//Было написано по-другому
@@ -52,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     if (empty($errors_sign_up)) {
-        $sql_users = "INSERT INTO users (dt_reg, email, password, user_name, contact_info) 
-				VALUES (NOW(), ?, ?, ?, ?);";
+        $sql_users = 'INSERT INTO users (dt_reg, email, password, user_name, contact_info) 
+				VALUES (NOW(), ?, ?, ?, ?)';
 
         //Создает подготовленное выражение на основе готового SQL запроса и переданных данных
         $insert_users = db_insert_data($mysqli_connect, $sql_users, [
@@ -78,8 +84,7 @@ $sign_up_content = include_template('sign-up.php', [
 $layout_content = include_template('layout.php', [
     'content' => $sign_up_content,
     'categories' => $categories,
-    'title' => 'Регистрация'
-   // 'user_name' => $user_name,
-    //'is_auth' => $is_auth      //Рандомная функция
+    'title' => 'Регистрация',
+    'user' => $user
 ]);
 print($layout_content);
