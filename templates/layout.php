@@ -21,12 +21,12 @@
                 <input class="main-header__search-btn" type="submit" name="find" value="Найти">
             </form>
             <a class="main-header__add-lot button"
-               href="<?php if (isset($_SESSION['user'])): ?>add.php<?php else: ?>HTTP/1.0 404 Not Found<?php endif; ?>">Добавить лот</a>
+               href="add.php">Добавить лот</a>
 
             <nav class="user-menu">
-                <?php if (isset($_SESSION['user'])): ?>
+                <?php if ($user): ?>
                     <div class="user-menu__logged">
-                        <p><?= $user; ?></p>
+                        <p><?= $user['user_name']; ?></p>
                         <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
                         <a class="user-menu__logout" href="logout.php">Выход</a>
                     </div>
