@@ -1,5 +1,4 @@
-<pre><?php var_dump($errors_sign_up); ?></pre>
-<pre><?php var_dump($_POST); ?></pre>
+
 <form class="form container<?php if (count($errors_sign_up) > 0): ?> form--invalid<?php endif; ?>"
       action="sign-up.php" method="post" autocomplete="off">
     <h2>Регистрация нового аккаунта</h2>
