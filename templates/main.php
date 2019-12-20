@@ -29,8 +29,13 @@
                                                   href="lot.php?id=<?= $lot['id']; ?>"><?= htmlspecialchars($lot['lot_name']); ?></a></h3>
                         <div class="lot__state">
                             <div class="lot__rate">
-                                <span class="lot__amount"></span>
-                                <span class="lot__cost"><?= format_as_price_in_rub($lot['initial_price']); ?></span>
+                                <span class="lot__amount">екекекекеке</span>
+                                <span class="lot__cost"><?php if(!empty($lot['current_price'])): ?>
+                                    <?= format_as_price_in_rub($lot['current_price']); ?>
+                                    <?php else: ?>
+                                    <?= format_as_price_in_rub($lot['initial_price']); ?>
+                                    <?php endif; ?>
+                                </span>
                             </div>
                             <?php $timer = timer($lot['dt_end']); ?>
                             <div class="lot__timer timer <?php if ($timer[0] < 1): ?>timer--finishing<?php endif; ?>">
@@ -43,3 +48,4 @@
         </ul>
     </section>
 
+    format_as_price_in_rub($lot['current_price'])
