@@ -1,9 +1,5 @@
 <?php
-require_once('helpers.php'); //Подключаем файлы
-require_once('mysqli_connect.php');
-require_once('categories.php');
-require_once('user.php');
-date_default_timezone_set('Asia/Novosibirsk');
+require_once('attach_file.php');
 
 if (!$user) {
     http_response_code(403);

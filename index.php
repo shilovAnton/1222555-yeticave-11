@@ -1,10 +1,5 @@
 <?php
-date_default_timezone_set('Asia/Novosibirsk');//Часовой пояс
-require_once('helpers.php'); //Подключаем файл
-require_once('mysqli_connect.php');
-require_once('categories.php');
-require_once('user.php');
-
+require_once('attach_file.php');
 
 // Запрос для главной страницы
 $query_lots = "SELECT lots.id, lot_name, initial_price, img, MAX(bid_price) as current_price, category_name,dt_end

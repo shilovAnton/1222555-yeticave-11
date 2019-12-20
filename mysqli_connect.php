@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Подключение БД
 $mysqli_connect = mysqli_connect("localhost", "root", "", "yeticave");//Подключение БД, ресурс соединения
@@ -21,3 +20,5 @@ function show_error($mysqli_connect)
     print("Ошибка MySQL: " . $error);
     die;
 }
+
+date_default_timezone_set('Asia/Novosibirsk');//Часовой пояс
