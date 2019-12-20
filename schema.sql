@@ -65,3 +65,5 @@ CREATE INDEX user_id ON bids (user_id);
 CREATE INDEX lot_id ON bids (lot_id);
 
 CREATE INDEX dt_reg ON users (dt_reg);
+
+CREATE FULLTEXT INDEX lots_ft_search ON lots(lot_name, description);
