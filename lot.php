@@ -26,10 +26,57 @@ if (!isset($lot)){
     die;
 }
 
+// запрос для истори ставок
+$sql_history = "SELECT user_name, DATE_FORMAT(bids.dt_add, '%d.%m.%y в %H : %i') as dt_format, bid_price FROM bids
+    LEFT JOIN users ON bids.user_id = users.id
+WHERE bids.lot_id = (?)
+ORDER BY bid_price DESC LIMIT 10";
+   $result_history = db_fetch_data($mysqli_connect, $sql_history, [$lot_id]);
+   $count = count($result_history);
+
+
+//Проверка формы
+$errors = [];
+
+$price = $lot['current_price'] ?? $lot['initial_price'];
+$min_bid = $price + $lot['bid_step'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!$user) {
+        http_response_code(403);
+        exit();
+    } else {
+        $cost = $_POST['cost'] ?? '';
+
+        if (empty($cost)) {
+            $errors['cost'] = "Введите вашу ставку";
+        }
+
+        if ((!ctype_digit($cost)) OR ($cost < $min_bid)) {
+            $errors['cost'] = "Цена должна быть целым числом боьше текущщей ставки, с учетом шага ставки";
+        }
+    }
+
+
+    if (!count($errors)) {
+        $sql = "INSERT INTO bids (dt_add, bid_price, user_id, lot_id) 
+				VALUES (NOW(), ?, ?, ?)";
+        db_insert_data($mysqli_connect, $sql, [$cost, $_SESSION['user']['id'], $lot['id']]);
+
+        //Делаем переадресацию на эту же страницу
+        header("Location: lot.php?id=" . $lot['id']);
+        exit();
+    }
+}
+
 // Подключение шаблонов
 $lot_content = include_template('lot.php', [
+    'errors' => $errors,
     'lot' => $lot,
-    'user' => $user
+    'user' => $user,
+    'min_bid' => $min_bid,
+    'result_history' => $result_history,
+    'count' => $count,
 ]);
 
 $layout_content = include_template('layout.php',[
