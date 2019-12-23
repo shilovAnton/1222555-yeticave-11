@@ -1,5 +1,6 @@
 <?php
 require_once('attach_file.php');
+require_once('getwinner.php');
 
 // Запрос для главной страницы
 $query_lots = "SELECT lots.id, lot_name, initial_price, img, MAX(bid_price) as current_price, category_name,dt_end
@@ -29,6 +30,7 @@ $layout_content = include_template('layout.php',[
     'title' => 'YetiCave - Главная страница',
     'user' => $user
 ]);
+
 print($layout_content);
 
 
