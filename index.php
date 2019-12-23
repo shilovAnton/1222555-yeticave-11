@@ -6,9 +6,9 @@ $query_lots = "SELECT lots.id, lot_name, initial_price, img, MAX(bid_price) as c
 FROM lots
          LEFT JOIN bids ON lots.id = bids.lot_id
          LEFT JOIN categories c on lots.category_id = c.id
-WHERE dt_end > NOW()
+WHERE dt_end > NOW() 
 GROUP BY lots.id
-ORDER BY lots.dt_add DESC LIMIT 6";
+ORDER BY lots.dt_add DESC LIMIT 9";
 $result_lots = mysqli_query($mysqli_connect, $query_lots);
 if ($result_lots) {
     $lots = mysqli_fetch_all($result_lots, MYSQLI_ASSOC);
