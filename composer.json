@@ -1,0 +1,6 @@
+{
+    "name": "anton/yt",
+    "require": {
+        "swiftmailer/swiftmailer": "^6.2"
+    }
+}
