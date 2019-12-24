@@ -1,6 +1,7 @@
 <?php
+
 require_once "vendor/autoload.php";
-require_once('attach_file.php');
+require_once('core.php');
 
 // запрос "Найти все лоты без победителей, дата истечения которых меньше или равна текущей дате."
 $sql_for_win = "SELECT * FROM lots
@@ -18,8 +19,7 @@ if ($result_sql) {
 // Create the Transport
 $transport = (new Swift_SmtpTransport('phpdemo.ru', 25))
     ->setUsername('keks@phpdemo.ru')
-    ->setPassword('htmlacademy')
-;
+    ->setPassword('htmlacademy');
 
 // Create the Mailer using your created Transport
 $mailer = new Swift_Mailer($transport);
@@ -39,21 +39,23 @@ LIMIT 1";
         show_error($mysqli_connect);
     }
     //Записать в лот победителем автора последней ставки.
-    $sql_for_bid ="UPDATE lots SET user_id_winner = {$bid['user_id']}
+    $sql_for_bid = "UPDATE lots SET user_id_winner = {$bid['user_id']}
 WHERE id = {$bid['lot_id']}";
     mysqli_query($mysqli_connect, $sql_for_bid);
 
-    $text = include_template('email.php',[
-        'lot' => $lot,
-        'user_name' => $bid['user_name']
-    ]);
+    $text = include_template(
+        'email.php',
+        [
+            'lot' => $lot,
+            'user_name' => $bid['user_name']
+        ]
+    );
 
 // Create a message
     $message = (new Swift_Message('Ваша ставка победила'))
         ->setFrom(['keks@phpdemo.ru' => 'keks@phpdemo.ru'])
         ->setTo($bid['email'])
-        ->setBody($text, 'text/html')
-    ;
+        ->setBody($text, 'text/html');
 
 // Send the message
     $result = $mailer->send($message);

@@ -1,5 +1,6 @@
 <?php
-require_once('attach_file.php');
+
+require_once('core.php');
 
 // Обращаемся к $_GET и проверяем на существование id
 $lot_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
@@ -21,7 +22,7 @@ if ($result_lot) {
 } else {
     show_error($mysqli_connect);
 }
-if (!isset($lot)){
+if (!isset($lot)) {
     header("HTTP/1.0 404 Not Found");
     die;
 }
@@ -31,8 +32,8 @@ $sql_history = "SELECT user_name, DATE_FORMAT(bids.dt_add, '%d.%m.%y в %H : %i'
     LEFT JOIN users ON bids.user_id = users.id
 WHERE bids.lot_id = (?)
 ORDER BY bid_price DESC LIMIT 10";
-   $result_history = db_fetch_data($mysqli_connect, $sql_history, [$lot_id]);
-   $count = count($result_history);
+$result_history = db_fetch_data($mysqli_connect, $sql_history, [$lot_id]);
+$count = count($result_history);
 
 
 //Проверка формы
@@ -59,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     if (!count($errors)) {
-        $sql = "INSERT INTO bids (dt_add, bid_price, user_id, lot_id) 
+        $sql = "INSERT INTO bids (dt_add, bid_price, user_id, lot_id)
 				VALUES (NOW(), ?, ?, ?)";
         db_insert_data($mysqli_connect, $sql, [$cost, $_SESSION['user']['id'], $lot['id']]);
 
@@ -70,21 +71,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Подключение шаблонов
-$lot_content = include_template('lot.php', [
-    'errors' => $errors,
-    'lot' => $lot,
-    'user' => $user,
-    'min_bid' => $min_bid,
-    'result_history' => $result_history,
-    'count' => $count,
-]);
+$lot_content = include_template(
+    'lot.php',
+    [
+        'errors' => $errors,
+        'lot' => $lot,
+        'user' => $user,
+        'min_bid' => $min_bid,
+        'result_history' => $result_history,
+        'count' => $count,
+    ]
+);
 
-$layout_content = include_template('layout.php',[
-    'content' => $lot_content,
-    'categories' => $categories,
-    'title' => $lot['lot_name'],
-    'user' => $user
-]);
+$layout_content = include_template(
+    'layout.php',
+    [
+        'content' => $lot_content,
+        'categories' => $categories,
+        'title' => $lot['lot_name'],
+        'user' => $user
+    ]
+);
 print($layout_content);
 
 

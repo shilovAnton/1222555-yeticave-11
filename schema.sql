@@ -22,21 +22,21 @@ CREATE TABLE categories
 
 CREATE TABLE lots
 (
-    id            INT AUTO_INCREMENT PRIMARY KEY,
-    dt_add        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    lot_name      VARCHAR(128),
-    description   TEXT,
-    img           VARCHAR(128),
-    initial_price DECIMAL,
-    dt_end        TIMESTAMP,
-    bid_step      DECIMAL,
+    id             INT AUTO_INCREMENT PRIMARY KEY,
+    dt_add         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    lot_name       VARCHAR(128),
+    description    TEXT,
+    img            VARCHAR(128),
+    initial_price  DECIMAL,
+    dt_end         TIMESTAMP,
+    bid_step       DECIMAL,
 
-    user_id_author  INT,
-    FOREIGN KEY (user_id_author) REFERENCES users(id),
-    user_id_winner  INT,
-    FOREIGN KEY (user_id_winner) REFERENCES users(id),
-    category_id     INT,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    user_id_author INT,
+    FOREIGN KEY (user_id_author) REFERENCES users (id),
+    user_id_winner INT,
+    FOREIGN KEY (user_id_winner) REFERENCES users (id),
+    category_id    INT,
+    FOREIGN KEY (category_id) REFERENCES categories (id)
 );
 
 CREATE TABLE bids
@@ -46,9 +46,9 @@ CREATE TABLE bids
     bid_price DECIMAL,
 
     user_id   INT,
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users (id),
     lot_id    INT,
-    FOREIGN KEY (lot_id) REFERENCES lots(id)
+    FOREIGN KEY (lot_id) REFERENCES lots (id)
 );
 
 CREATE INDEX dt_add ON lots (dt_add);
@@ -66,4 +66,4 @@ CREATE INDEX lot_id ON bids (lot_id);
 
 CREATE INDEX dt_reg ON users (dt_reg);
 
-CREATE FULLTEXT INDEX lots_ft_search ON lots(lot_name, description);
+CREATE FULLTEXT INDEX lots_ft_search ON lots (lot_name, description);

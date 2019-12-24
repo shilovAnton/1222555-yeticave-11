@@ -56,15 +56,16 @@ FROM lots
          LEFT JOIN categories c on lots.category_id = c.id
 WHERE dt_end > NOW()
 GROUP BY lots.id
-ORDER BY lots.dt_add DESC LIMIT 6;
+ORDER BY lots.dt_add DESC
+LIMIT 6;
 
 
 /* показать лот по его id. Получите также название категории, к которой принадлежит лот */
 
 SELECT *
 FROM lots
-        JOIN categories ON lots.category_id = categories.id
-WHERE lots.id=3;
+         JOIN categories ON lots.category_id = categories.id
+WHERE lots.id = 3;
 
 /* обновить название лота по его идентификатору */
 
@@ -76,7 +77,7 @@ WHERE id = 2;
 
 SELECT bid_price
 FROM bids
-WHERE lot_id=4
+WHERE lot_id = 4
 ORDER BY dt_add;
 
 

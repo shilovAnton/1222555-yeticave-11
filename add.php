@@ -1,5 +1,6 @@
 <?php
-require_once('attach_file.php');
+
+require_once('core.php');
 
 if (!$user) {
     http_response_code(403);
@@ -7,7 +8,6 @@ if (!$user) {
 }
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     // Удаляет теги
     $strip_tags_fields = ['lot_name', 'description'];
     foreach ($strip_tags_fields as $field) {
@@ -69,20 +69,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($_FILES['img']['tmp_name'], $file_path . $_FILES['img']['name']);
 
         //SQL запрос с плейсхолдерами вместо значений
-        $sql = "INSERT INTO lots (dt_add, user_id_author, lot_name, category_id, description, img, initial_price, bid_step, dt_end) 
+        $sql = "INSERT INTO lots (dt_add, user_id_author, lot_name, category_id, description, img, initial_price, bid_step, dt_end)
 				VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?)";
 
         //Создает подготовленное выражение на основе готового SQL запроса и переданных данных
-        $insert_lot = db_insert_data($mysqli_connect, $sql, [
-            $user['id'],
-            $_POST['lot_name'],
-            $_POST['category_id'],
-            $_POST['description'],
-            '/uploads/' . $_FILES['img']['name'],
-            $_POST['initial_price'],
-            $_POST['bid_step'],
-            $_POST['dt_end']
-        ]);
+        $insert_lot = db_insert_data(
+            $mysqli_connect,
+            $sql,
+            [
+                $user['id'],
+                $_POST['lot_name'],
+                $_POST['category_id'],
+                $_POST['description'],
+                '/uploads/' . $_FILES['img']['name'],
+                $_POST['initial_price'],
+                $_POST['bid_step'],
+                $_POST['dt_end']
+            ]
+        );
 
         if ($insert_lot) {
             header("Location: lot.php?id=$insert_lot");
@@ -92,17 +96,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Подключение шаблонов
-$add_content = include_template('add.php',[
-    'categories' => $categories,
-    'errors' => $errors
-]);
+$add_content = include_template(
+    'add.php',
+    [
+        'categories' => $categories,
+        'errors' => $errors
+    ]
+);
 
-$layout_content = include_template('layout.php',[
-    'content' => $add_content,
-    'categories' => $categories,
-    'title' => 'Добавление лота',
-    'user' => $user
-]);
+$layout_content = include_template(
+    'layout.php',
+    [
+        'content' => $add_content,
+        'categories' => $categories,
+        'title' => 'Добавление лота',
+        'user' => $user
+    ]
+);
 print($layout_content);
 
 

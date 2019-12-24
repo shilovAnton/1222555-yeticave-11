@@ -1,5 +1,6 @@
 <?php
-require_once('attach_file.php');
+
+require_once('core.php');
 
 //Закрываем доступ для не залогиненых
 if (!$user) {
@@ -12,7 +13,7 @@ $sql = "SELECT lots.id, lot_name, img, category_name, DATE_FORMAT(bids.dt_add, '
 FROM bids LEFT JOIN lots ON bids.lot_id = lots.id
 LEFT JOIN categories ON lots.category_id = categories.id
 LEFT JOIN users ON lots.user_id_author = users.id
-WHERE bids.user_id = {$_SESSION['user']['id']}  
+WHERE bids.user_id = {$_SESSION['user']['id']}
 ORDER BY dt_format DESC";
 
 $result = mysqli_query($mysqli_connect, $sql);
@@ -22,14 +23,20 @@ if ($result) {
     show_error($mysqli_connect);
 }
 // Подключение шаблонов
-$page_content = include_template('my-bets.php',[
-    'my_bids' => $my_bids
-]);
+$page_content = include_template(
+    'my-bets.php',
+    [
+        'my_bids' => $my_bids
+    ]
+);
 
-$layout_content = include_template('layout.php',[
-    'content' => $page_content,
-    'categories' => $categories,
-    'title' => 'Мои ставки',
-    'user' => $user
-]);
+$layout_content = include_template(
+    'layout.php',
+    [
+        'content' => $page_content,
+        'categories' => $categories,
+        'title' => 'Мои ставки',
+        'user' => $user
+    ]
+);
 print($layout_content);

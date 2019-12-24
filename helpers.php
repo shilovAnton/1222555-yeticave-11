@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Проверяет переданную дату на соответствие формату 'ГГГГ-ММ-ДД'
  *
@@ -13,7 +14,8 @@
  *
  * @return bool true при совпадении с форматом 'ГГГГ-ММ-ДД', иначе false
  */
-function is_date_valid(string $date) : bool {
+function is_date_valid(string $date): bool
+{
     $format_to_check = 'Y-m-d';
     $dateTimeObj = date_create_from_format($format_to_check, $date);
 
@@ -29,7 +31,8 @@ function is_date_valid(string $date) : bool {
  *
  * @return mysqli_stmt Подготовленное выражение
  */
-function db_get_prepare_stmt($link, $sql, $data = []) {
+function db_get_prepare_stmt($link, $sql, $data = [])
+{
     $stmt = mysqli_prepare($link, $sql);
 
     if ($stmt === false) {
@@ -46,12 +49,14 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
 
             if (is_int($value)) {
                 $type = 'i';
-            }
-            else if (is_string($value)) {
-                $type = 's';
-            }
-            else if (is_double($value)) {
-                $type = 'd';
+            } else {
+                if (is_string($value)) {
+                    $type = 's';
+                } else {
+                    if (is_double($value)) {
+                        $type = 'd';
+                    }
+                }
             }
 
             if ($type) {
@@ -96,9 +101,9 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
  *
  * @return string Рассчитанная форма множественнго числа
  */
-function get_noun_plural_form (int $number, string $one, string $two, string $many): string
+function get_noun_plural_form(int $number, string $one, string $two, string $many): string
 {
-    $number = (int) $number;
+    $number = (int)$number;
     $mod10 = $number % 10;
     $mod100 = $number % 100;
 
@@ -126,7 +131,8 @@ function get_noun_plural_form (int $number, string $one, string $two, string $ma
  * @param array $data Ассоциативный массив с данными для шаблона
  * @return string Итоговый HTML
  */
-function include_template($name, array $data = []) {
+function include_template($name, array $data = [])
+{
     $name = 'templates/' . $name;
     $result = '';
 
@@ -145,18 +151,17 @@ function include_template($name, array $data = []) {
 
 /**
  * Функция форматирования числа суммы, ставит пробел между категориями, добавляет знак ₽.
- * @param  int $input Сумма (число).
+ * @param int $input Сумма (число).
  * @return string Отформатированное число.
  */
 
-function format_as_price_in_rub($input) {
-
+function format_as_price_in_rub($input)
+{
     $cell_number = ceil($input);
 
     if ($cell_number < 1000) {
         $output = $cell_number;
-    }
-    else {
+    } else {
         $output = number_format($cell_number, 0, ".", " ");
     }
     return "$output ₽";
@@ -195,7 +200,7 @@ function check($data)
         $data = trim($data); // Удаляет пробелы
         $data = stripslashes($data); // Удаляет экранирование символов, двойные слеши
         $data = htmlspecialchars($data); // Преобразует специальные символы в HTML-сущности
-        }
+    }
     return $data;
 }
 
@@ -205,7 +210,8 @@ function check($data)
  * @param $name
  * @return mixed|string
  */
-function getPostVal($name) {
+function getPostVal($name)
+{
     htmlspecialchars($name);
     return $_POST[$name] ?? "";
 }
@@ -217,7 +223,8 @@ function getPostVal($name) {
  * @param $max int
  * @return string
  */
-function isCorrectLength($name, $min, $max) {
+function isCorrectLength($name, $min, $max)
+{
     $len = strlen($_POST[$name]);
     if ($len < $min or $len > $max) {
         return "Значение должно быть от $min до $max символов";
@@ -250,7 +257,8 @@ function db_insert_data($link, $sql, $data = [])
  * @param array $data
  * @return array
  */
-function db_fetch_data($link, $sql, $data = []) {
+function db_fetch_data($link, $sql, $data = [])
+{
     $result = [];
     $stmt = db_get_prepare_stmt($link, $sql, $data);
     mysqli_stmt_execute($stmt);

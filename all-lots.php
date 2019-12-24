@@ -1,5 +1,6 @@
 <?php
-require_once('attach_file.php');
+
+require_once('core.php');
 
 // Обращаемся к $_GET и проверяем на существование id
 $category_id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
@@ -22,7 +23,10 @@ $items_count = $items_count_result[0]['count_lot'];
 $pages_count = ceil($items_count / $page_items);
 $offset = ($cur_page - 1) * $page_items;
 
-$pages = range(1, $pages_count);
+$pages = [];
+if ($pages_count > 0) {
+    $pages = range(1, $pages_count);
+}
 
 
 // Запрос для страницы с категориями
@@ -41,17 +45,23 @@ if ($result_lots) {
 }
 
 // Подключение шаблонов
-$page_content = include_template('all-lots.php',[
-    'lots' => $lots,
-    'pages' => $pages,
-    'category_id' => htmlspecialchars($category_id),
-    'cur_page' =>$cur_page,
-]);
+$page_content = include_template(
+    'all-lots.php',
+    [
+        'lots' => $lots,
+        'pages' => $pages,
+        'category_id' => htmlspecialchars($category_id),
+        'cur_page' => $cur_page,
+    ]
+);
 
-$layout_content = include_template('layout.php',[
-    'content' => $page_content,
-    'categories' => $categories,
-    'title' => 'YetiCave - Все лоты',
-    'user' => $user
-]);
+$layout_content = include_template(
+    'layout.php',
+    [
+        'content' => $page_content,
+        'categories' => $categories,
+        'title' => 'YetiCave - Все лоты',
+        'user' => $user
+    ]
+);
 print($layout_content);

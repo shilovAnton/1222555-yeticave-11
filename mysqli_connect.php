@@ -21,4 +21,4 @@ function show_error($mysqli_connect)
     die;
 }
 
-date_default_timezone_set('Asia/Novosibirsk');//Часовой пояс
+

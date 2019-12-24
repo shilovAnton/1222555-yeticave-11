@@ -1,11 +1,11 @@
 <?php
-require_once('attach_file.php');
+
+require_once('core.php');
 
 $search = $_GET['search'] ?? '';
 $search_valid = trim($search);
 
 if ($search_valid) {
-
     // Пагинация
     $cur_page = $_GET['page'] ?? 1;
     $page_items = 9;
@@ -32,25 +32,30 @@ GROUP BY lots.id
 ORDER BY lots.dt_add DESC LIMIT $page_items OFFSET $offset";
 
     $lots = db_fetch_data($mysqli_connect, $sql, [$search_valid]);
-
-}else{
+} else {
     $lots = [];
 }
 
 
 // Подключение шаблонов
-$search_content = include_template('search.php', [
-    'lots' => $lots,
-    'pages' => $pages,
-    'search_valid' => htmlspecialchars($search_valid),
-    'cur_page' =>$cur_page,
+$search_content = include_template(
+    'search.php',
+    [
+        'lots' => $lots,
+        'pages' => $pages,
+        'search_valid' => htmlspecialchars($search_valid),
+        'cur_page' => $cur_page,
 
-]);
+    ]
+);
 
-$layout_content = include_template('layout.php', [
-    'content' => $search_content,
-    'categories' => $categories,
-    'title' => 'YetiCave - Результаты поиска',
-    'user' => $user
-]);
+$layout_content = include_template(
+    'layout.php',
+    [
+        'content' => $search_content,
+        'categories' => $categories,
+        'title' => 'YetiCave - Результаты поиска',
+        'user' => $user
+    ]
+);
 print($layout_content);

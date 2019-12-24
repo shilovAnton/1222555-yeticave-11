@@ -1,13 +1,13 @@
 <?php
-require_once('attach_file.php');
+
+require_once('core.php');
 
 $errors_login = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     // Удаляет теги из email
-        if (isset($_POST['email'])) {
-            strip_tags($_POST['email']);
-        }
+    if (isset($_POST['email'])) {
+        strip_tags($_POST['email']);
+    }
 
     //Проверка полей на пустоту
     $required_fields = ['email', 'password'];
@@ -42,14 +42,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Подключение шаблонов
-$login_content = include_template('login.php', [
-    'errors_login' => $errors_login
-]);
+$login_content = include_template(
+    'login.php',
+    [
+        'errors_login' => $errors_login
+    ]
+);
 
-$layout_content = include_template('layout.php', [
-    'content' => $login_content,
-    'categories' => $categories,
-    'title' => 'Вход',
-    'user' => $user
-]);
+$layout_content = include_template(
+    'layout.php',
+    [
+        'content' => $login_content,
+        'categories' => $categories,
+        'title' => 'Вход',
+        'user' => $user
+    ]
+);
 print($layout_content);

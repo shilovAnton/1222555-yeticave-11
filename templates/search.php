@@ -1,9 +1,9 @@
 <div class="container">
     <section class="lots">
-        <?php if(!empty($lots)): ?>
-        <h2>Результаты поиска по запросу «<span><?= htmlspecialchars($search_valid); ?></span>»</h2>
+        <?php if (!empty($lots)): ?>
+            <h2>Результаты поиска по запросу «<span><?= htmlspecialchars($search_valid); ?></span>»</h2>
         <?php else: ?>
-        <h2>Ничего не найдено по вашему запросу</h2>
+            <h2>Ничего не найдено по вашему запросу</h2>
         <?php endif; ?>
         <ul class="lots__list">
             <?php foreach ($lots as $lot): ?>
@@ -14,11 +14,13 @@
                     <div class="lot__info">
                         <span class="lot__category"><?= htmlspecialchars($lot['category_name']); ?></span>
                         <h3 class="lot__title"><a class="text-link"
-                                                  href="lot.php?id=<?= $lot['id']; ?>"><?= htmlspecialchars($lot['lot_name']); ?></a></h3>
+                                                  href="lot.php?id=<?= $lot['id']; ?>"><?= htmlspecialchars(
+                                    $lot['lot_name']
+                                ); ?></a></h3>
                         <div class="lot__state">
                             <div class="lot__rate">
                                 <span class="lot__amount">Цена</span>
-                                <span class="lot__cost"><?php if(!empty($lot['current_price'])): ?>
+                                <span class="lot__cost"><?php if (!empty($lot['current_price'])): ?>
                                         <?= format_as_price_in_rub($lot['current_price']); ?>
                                     <?php else: ?>
                                         <?= format_as_price_in_rub($lot['initial_price']); ?>
