@@ -28,6 +28,17 @@ if ($pages_count > 0) {
     $pages = range(1, $pages_count);
 }
 
+// Запрос для названия категории
+$sql_name = "SELECT category_name
+FROM categories
+WHERE id = '{$category_id}'";
+$result_category_name = mysqli_query($mysqli_connect, $sql_name);
+if ($result_category_name) {
+    $name_category = mysqli_fetch_all($result_category_name, MYSQLI_ASSOC);
+} else {
+    show_error($mysqli_connect);
+}
+
 
 // Запрос для страницы с категориями
 $sql = "SELECT lots.id, lot_name, initial_price, img, MAX(bid_price) as current_price, category_name,dt_end
@@ -52,6 +63,7 @@ $page_content = include_template(
         'pages' => $pages,
         'category_id' => htmlspecialchars($category_id),
         'cur_page' => $cur_page,
+        'name_category' => $name_category,
     ]
 );
 
