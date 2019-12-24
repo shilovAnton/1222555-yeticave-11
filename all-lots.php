@@ -10,7 +10,7 @@ if (empty($category_id)) {  //Проверяет переменную, возв�
 
 // Пагинация
 $cur_page = $_GET['page'] ?? 1;
-$page_items = 1;
+$page_items = 9;
 
 $sql_count = "SELECT COUNT(*) as count_lot
 FROM lots
