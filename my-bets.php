@@ -9,11 +9,13 @@ if (!$user) {
 }
 
 //Получаем список ставок
-$sql = "SELECT lots.id, lot_name, img, category_name, DATE_FORMAT(bids.dt_add, '%d.%m.%y в %H : %i') as dt_format, dt_end, bid_price, email, contact_info, user_id_winner
+$sql = "SELECT lots.id, lot_name, img, category_name, DATE_FORMAT(MAX(bids.dt_add), '%d.%m.%y в %H : %i') as dt_format, dt_end,
+       MAX(bid_price) as bid_price, email, contact_info, lots.user_id_winner
 FROM bids LEFT JOIN lots ON bids.lot_id = lots.id
 LEFT JOIN categories ON lots.category_id = categories.id
 LEFT JOIN users ON lots.user_id_author = users.id
 WHERE bids.user_id = {$_SESSION['user']['id']}
+GROUP BY lots.id
 ORDER BY dt_format DESC";
 
 $result = mysqli_query($mysqli_connect, $sql);
@@ -22,6 +24,7 @@ if ($result) {
 } else {
     show_error($mysqli_connect);
 }
+
 // Подключение шаблонов
 $page_content = include_template(
     'my-bets.php',
