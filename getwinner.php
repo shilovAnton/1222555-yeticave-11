@@ -33,7 +33,7 @@ ORDER BY dt_add DESC
 LIMIT 1";
 
     $resul = mysqli_query($mysqli_connect, $sql_for_bid);
-    if ($result_sql) {
+    if ($resul) {
         $bid = mysqli_fetch_assoc($resul);
     } else {
         show_error($mysqli_connect);
@@ -44,15 +44,15 @@ WHERE id = {$bid['lot_id']}";
     mysqli_query($mysqli_connect, $sql_for_bid);
 
     $text = include_template('email.php',[
-        'lot_id' => $lot['id'],
+        'lot' => $lot,
         'user_name' => $bid['user_name']
     ]);
 
 // Create a message
     $message = (new Swift_Message('Ваша ставка победила'))
         ->setFrom(['keks@phpdemo.ru' => 'keks@phpdemo.ru'])
-        ->setTo([$bid['email']])
-        ->setBody($text)
+        ->setTo($bid['email'])
+        ->setBody($text, 'text/html')
     ;
 
 // Send the message
