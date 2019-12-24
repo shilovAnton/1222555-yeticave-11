@@ -1,7 +1,7 @@
 <div class="container">
     <section class="lots">
-        <h2>Все лоты в категории «<span><?php if ($lots): ?><?= htmlspecialchars(
-                    $lots[0]['category_name']
+        <h2>Все лоты в категории «<span><?php if ($name_category): ?><?= htmlspecialchars(
+                    $name_category[0]['category_name']
                 ) ?? ''; ?><?php endif; ?></span>»</h2>
         <ul class="lots__list">
             <?php foreach ($lots as $lot): ?>
@@ -44,7 +44,7 @@
             <li class="pagination-item <?php if ($cur_page == $page): ?>pagination-item-active<?php endif; ?>"><a
                     href="/all-lots.php?page=<?= $page; ?>&id=<?= $category_id; ?>"><?= $page; ?></a></li>
         <?php endforeach; ?>
-        <?php if ($cur_page != count($pages)): ?>
+        <?php if (($cur_page != count($pages))&&(!empty($pages))): ?>
             <li class="pagination-item pagination-item-next"><a
                     href="/all-lots.php?page=<?= $cur_page + 1; ?>&id=<?= $category_id; ?>">Вперед</a></li>
         <?php endif; ?>
