@@ -9,3 +9,4 @@
 * Добавление ставок;
 * Поиск лотов по категориям и названиям;
 * Определение победителя на основе максимальной ставки.
+  <img width = "636" src="https://github.com/shilovAnton/Yeticave2/blob/master/img/yeticavee.jpg" alt=""/>
