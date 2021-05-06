@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    //Усли валидация пошла успешно
+    //Если валидация пошла успешно
     if (!count($errors_login)) {
         $user_array = $result_sql[0];
         $_SESSION['user'] = $user_array;

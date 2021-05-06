@@ -1,7 +1,7 @@
 <?php
 
 // Подключение БД
-$mysqli_connect = mysqli_connect("localhost", "root", "", "yeticave");//Подключение БД, ресурс соединения
+$mysqli_connect = mysqli_connect("localhost", "cq70056_yeticave", "Vh9YTF66", "cq70056_yeticave");//Подключение БД, ресурс соединения
 if ($mysqli_connect == false) {
     print("Ошибка подключения: " . mysqli_connect_error());
     die;
